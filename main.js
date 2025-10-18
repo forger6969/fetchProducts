@@ -8,7 +8,7 @@ async function getProd() {
 
 
         let wrapper = document.querySelector(`.cards-wrapper`)
-        res.products.forEach(e => {
+        res.products.forEach((e, aziz) => {
 
             let price = e.price * 12000
 
@@ -24,11 +24,35 @@ async function getProd() {
                 <p class="card-price">${price.toLocaleString()} сум</p>
                 <p class="card-rating">rating:${e.rating}</p>
                 <p class="card-category">cateogry:${e.category}</p>
+                <button class="btn" data-aziz="${aziz}">Buy</button>
             `
 
             wrapper.append(div)
 
+            let btn = div.querySelector(`.btn`)
+
+            btn.addEventListener(`click`, () => {
+
+                let indexBtn = btn.getAttribute('data-aziz')
+                console.log(indexBtn);
+                let selectedProd = res.products[indexBtn]
+
+                if (confirm(`Anniq olasanmi eshshakmiyya`)) {
+
+                    let p = document.createElement(`p`)
+                    p.textContent = selectedProd.title
+                    let wrapperKorzina = document.querySelector(`.korzina`)
+                    wrapperKorzina.append(p)
+
+                } else {
+                    alert(`omasen oma dnx`)
+                }
+
+            })
+
         });
+
+
 
     }
 
